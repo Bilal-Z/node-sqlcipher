@@ -177,8 +177,7 @@ describe('backup', function() {
         });
     });
 
-    // This is not currently available with the sqlcipher build
-    ('sqlcipher' == 'sqlcipher' ? it.skip : it) ('can backup from main to temp', function(done) {
+    (sqlite3.VERSION_NUMBER < 3026000 ? it.skip : it) ('can backup from main to temp', function(done) {
         var backup = db.backup('test/support/prepare.db', 'main', 'temp', false, function(err) {
             if (err) throw err;
             backup.step(-1, function(err) {
